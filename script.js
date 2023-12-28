@@ -1,3 +1,6 @@
+// Initialize score at 0 in global scope
+let score = 0
+
 // Define class for create questions
 class Question {
     constructor(text, choices, answer) {
@@ -44,6 +47,7 @@ function showQuestion(question) {
 function selectAnswer(question, choice) {
     if (question.isCorrectAnswer(choice)) {
         alert('Correct!');
+        score++;
     } else {
         alert('Wrong!');
     }
@@ -53,7 +57,7 @@ function selectAnswer(question, choice) {
     if (currentQuestionIndex < questions.length) {
         showQuestion(questions[currentQuestionIndex]);
     } else {
-        alert('Quiz finished!');
+        showFinalScore();
     }
 }
 
@@ -66,6 +70,10 @@ function setupEventListeners() {
     });
 }
 
+function showFinalScore() {
+    alert(`Quiz finished! Your score: ${score}/${questions.length}`);
+
+}
 function initializeQuiz() {
     showQuestion(questions[currentQuestionIndex]);
     setupEventListeners();
