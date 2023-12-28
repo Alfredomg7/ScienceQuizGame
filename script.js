@@ -118,8 +118,12 @@ function showFinalScore() {
     
     finalScoreElement.textContent = `Your final score: ${score}/${questions.length} (${scorePercentage.toFixed(1)}%)`;
     
-    if (scorePercentage >= 60) {
+    if (scorePercentage >= 80) {
         finalScoreElement.className = 'final-score correct';
+    } else if (scorePercentage >= 60) { 
+        finalScoreElement.className = 'final-score good';
+    } else if (scorePercentage > 30) {
+        finalScoreElement.className = 'final-score regular';
     } else {
         finalScoreElement.className = 'final-score wrong';
     }
