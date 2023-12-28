@@ -27,7 +27,17 @@ const questions = [
     new Question("What is the process by which plants lose water vapor through small openings in their leaves?", ['a) Transpiration', 'b) Condensation', 'c) Precipitation', 'd) Evaporation'], 'a) Transpiration'),
     new Question("What is the SI unit of electric current?", ['a) Volt', 'b) Ampere', 'c) Ohm', 'd) Watt'], 'b) Ampere'),
     new Question("Which of the following is the largest mammal on Earth?", ['a) African elephant', 'b) Blue whale', 'c) Giraffe', 'd) Polar bear'], 'b) Blue whale'),
-    new Question("What is the chemical formula for water?", ['a) H2O', 'b) CO2', 'c) CH4', 'd) O2'], 'a) H2O')
+    new Question("What is the chemical formula for water?", ['a) H2O', 'b) CO2', 'c) CH4', 'd) O2'], 'a) H2O'),
+    new Question("What is the main constituent of the sun?", ['a) Hydrogen', 'b) Helium', 'c) Oxygen', 'd) Carbon'], 'a) Hydrogen'),
+    new Question("Which vitamin is produced by the human skin in response to sunlight?", ['a) Vitamin A', 'b) Vitamin B', 'c) Vitamin C', 'd) Vitamin D'], 'd) Vitamin D'),
+    new Question("What phenomenon causes the tail of a comet to always point away from the sun?", ['a) Gravity', 'b) Solar wind', 'c) Magnetic field', 'd) Radiation pressure'], 'b) Solar wind'),
+    new Question("What is the term for the amount of matter in an object?", ['a) Weight', 'b) Density', 'c) Mass', 'd) Volume'], 'c) Mass'),
+    new Question("Which element has the highest melting point?", ['a) Iron', 'b) Carbon', 'c) Tungsten', 'd) Uranium'], 'c) Tungsten'),
+    new Question("What is the name of the galaxy that contains our solar system?", ['a) Andromeda', 'b) Milky Way', 'c) Whirlpool', 'd) Triangulum'], 'b) Milky Way'),
+    new Question("What is the term for a reaction in which an atom loses an electron?", ['a) Reduction', 'b) Oxidation', 'c) Hydrolysis', 'd) Neutralization'], 'b) Oxidation'),
+    new Question("Which layer of the Earth is made up of tectonic plates?", ['a) Crust', 'b) Mantle', 'c) Outer core', 'd) Inner core'], 'a) Crust'),
+    new Question("What is the basic unit of life?", ['a) Organ', 'b) Cell', 'c) Tissue', 'd) Molecule'], 'b) Cell'),
+    new Question("What is the name of the force that keeps objects in orbit around each other?", ['a) Centrifugal force', 'b) Gravitational force', 'c) Electromagnetic force', 'd) Nuclear force'], 'b) Gravitational force')
 ]
 
 // Function for randomly shuffle questions and answers
