@@ -43,7 +43,7 @@ function showQuestion(question) {
     const questionElement = document.getElementById('question');
     questionElement.innerText = question.text;
 
-    const buttons = document.querySelectorAll(".btn");
+    const buttons = document.querySelectorAll("#answer-buttons .btn");
     buttons.forEach((button, index) => {
         button.innerText = question.choices[index];
         button.className = 'btn';
@@ -90,10 +90,30 @@ function setupEventListeners() {
             selectAnswer(questions[currentQuestionIndex], e.target.textContent, e.target);
         }
     });
+
+    // Attach event listener to restart button
+    document.getElementById('restart-button').addEventListener('click', restartQuiz);
+}
+
+function setupGame() {
+    shuffleArray(questions);
+    questions.forEach(question => question.shuffleChoices());
+    currentQuestionIndex = 0;
+    score = 0;
+    showQuestion(questions[currentQuestionIndex]);
+
+}
+function restartQuiz() {
+    setupGame(questions);
+
+    // Hide the quiz end container
+    const quizEndContainer = document.getElementById('quiz-end-container');
+    quizEndContainer.style.display = 'none';
 }
 
 function showFinalScore() {
     const finalScoreElement = document.getElementById('final-score');
+    const quizEndContainer = document.getElementById('quiz-end-container');
     const scorePercentage = (score / questions.length) * 100;
     
     finalScoreElement.textContent = `Your final score: ${score}/${questions.length} (${scorePercentage.toFixed(1)}%)`;
@@ -104,17 +124,14 @@ function showFinalScore() {
         finalScoreElement.className = 'final-score wrong';
     }
     
-    finalScoreElement.style.display = 'block';
+    quizEndContainer.style.display = 'block';
 }
 
 function initializeQuiz() {
-    shuffleArray(questions);
-    questions.forEach(question => question.shuffleChoices());
-    currentQuestionIndex = 0;
-    score = 0;
-    showQuestion(questions[currentQuestionIndex]);
+    setupGame(questions);
     setupEventListeners();
 }
 
 // Start the quiz
-initializeQuiz();
+initializeQuiz(questions);
+
