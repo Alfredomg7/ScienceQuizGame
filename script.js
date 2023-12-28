@@ -15,30 +15,29 @@ class Question {
     }
 }
 
-// Create Questions in an array
+// Create questions, options and correct answer in an array
 const questions = [
-    new Question("What is the rate of acceleration of gravity at the Earth's surface?",['a) 11.2 m/s2', 'b) 9.8 m/s2', 'c) 7.8 m/s2', 'd) 6.7 m/s2'], 'b) 9.8 m/s2'),
-    new Question("What is the smallest particle of an element that retains the properties of that element?", ['a) Molecule', 'b) Atom', 'c) Proton', 'd) Electron'], 'b) Atom'),
-    new Question("Which planet in our solar system is known as the 'Red Planet'?", ['a) Venus', 'b) Mars', 'c) Jupiter', 'd) Saturn'], 'b) Mars'),
-    new Question("What is the process by which plants convert sunlight into chemical energy?", ['a) Respiration', 'b) Photosynthesis', 'c) Fermentation', 'd) Combustion'], 'b) Photosynthesis'),
-    new Question("What is the chemical symbol for gold?", ['a) Go', 'b) Ag', 'c) Au', 'd) Hg'], 'c) Au'),
-    new Question("Which gas makes up the majority of Earth's atmosphere?", ['a) Oxygen', 'b) Carbon dioxide', 'c) Nitrogen', 'd) Hydrogen'], 'c) Nitrogen'),
-    new Question("What is the study of earthquakes and the movement of the Earth's crust called?", ['a) Seismology', 'b) Geology', 'c) Astronomy', 'd) Meteorology'], 'a) Seismology'),
-    new Question("What is the process by which plants lose water vapor through small openings in their leaves?", ['a) Transpiration', 'b) Condensation', 'c) Precipitation', 'd) Evaporation'], 'a) Transpiration'),
-    new Question("What is the SI unit of electric current?", ['a) Volt', 'b) Ampere', 'c) Ohm', 'd) Watt'], 'b) Ampere'),
-    new Question("Which of the following is the largest mammal on Earth?", ['a) African elephant', 'b) Blue whale', 'c) Giraffe', 'd) Polar bear'], 'b) Blue whale'),
-    new Question("What is the chemical formula for water?", ['a) H2O', 'b) CO2', 'c) CH4', 'd) O2'], 'a) H2O'),
-    new Question("What is the main constituent of the sun?", ['a) Hydrogen', 'b) Helium', 'c) Oxygen', 'd) Carbon'], 'a) Hydrogen'),
-    new Question("Which vitamin is produced by the human skin in response to sunlight?", ['a) Vitamin A', 'b) Vitamin B', 'c) Vitamin C', 'd) Vitamin D'], 'd) Vitamin D'),
-    new Question("What phenomenon causes the tail of a comet to always point away from the sun?", ['a) Gravity', 'b) Solar wind', 'c) Magnetic field', 'd) Radiation pressure'], 'b) Solar wind'),
-    new Question("What is the term for the amount of matter in an object?", ['a) Weight', 'b) Density', 'c) Mass', 'd) Volume'], 'c) Mass'),
-    new Question("Which element has the highest melting point?", ['a) Iron', 'b) Carbon', 'c) Tungsten', 'd) Uranium'], 'c) Tungsten'),
-    new Question("What is the name of the galaxy that contains our solar system?", ['a) Andromeda', 'b) Milky Way', 'c) Whirlpool', 'd) Triangulum'], 'b) Milky Way'),
-    new Question("What is the term for a reaction in which an atom loses an electron?", ['a) Reduction', 'b) Oxidation', 'c) Hydrolysis', 'd) Neutralization'], 'b) Oxidation'),
-    new Question("Which layer of the Earth is made up of tectonic plates?", ['a) Crust', 'b) Mantle', 'c) Outer core', 'd) Inner core'], 'a) Crust'),
-    new Question("What is the basic unit of life?", ['a) Organ', 'b) Cell', 'c) Tissue', 'd) Molecule'], 'b) Cell'),
-    new Question("What is the name of the force that keeps objects in orbit around each other?", ['a) Centrifugal force', 'b) Gravitational force', 'c) Electromagnetic force', 'd) Nuclear force'], 'b) Gravitational force')
-]
+    new Question("What is the rate of acceleration of gravity at the Earth's surface?",['11.2 m/s2', '9.8 m/s2', '7.8 m/s2', '6.7 m/s2'], '9.8 m/s2'),
+    new Question("What is the smallest particle of an element that retains the properties of that element?", ['Molecule', 'Atom', 'Proton', 'Electron'], 'Atom'),
+    new Question("What is the process by which plants convert sunlight into chemical energy?", ['Respiration', 'Photosynthesis', 'Fermentation', 'Combustion'], 'Photosynthesis'),
+    new Question("What is the chemical symbol for gold?", ['Go', 'Ag', 'Au', 'Hg'], 'Au'),
+    new Question("Which gas makes up the majority of Earth's atmosphere?", ['Oxygen', 'Carbon dioxide', 'Nitrogen', 'Hydrogen'], 'Nitrogen'),
+    new Question("What is the study of earthquakes and the movement of the Earth's crust called?", ['Seismology', 'Geology', 'Astronomy', 'Meteorology'], 'Seismology'),
+    new Question("What is the process by which plants lose water vapor through small openings in their leaves?", ['Transpiration', 'Condensation', 'Precipitation', 'Evaporation'], 'Transpiration'),
+    new Question("What is the SI unit of electric current?", ['Volt', 'Ampere', 'Ohm', 'Watt'], 'Ampere'),
+    new Question("Which of the following is the largest mammal on Earth?", ['African elephant', 'Blue whale', 'Giraffe', 'Polar bear'], 'Blue whale'),
+    new Question("What is the chemical formula for water?", ['H2O', 'CO2', 'CH4', 'O2'], 'H2O'),
+    new Question("What is the main constituent of the sun?", ['Hydrogen', 'Helium', 'Oxygen', 'Carbon'], 'Hydrogen'),
+    new Question("Which vitamin is produced by the human skin in response to sunlight?", ['Vitamin A', 'Vitamin B', 'Vitamin C', 'Vitamin D'], 'Vitamin D'),
+    new Question("What phenomenon causes the tail of a comet to always point away from the sun?", ['Gravity', 'Solar wind', 'Magnetic field', 'Radiation pressure'], 'Solar wind'),
+    new Question("What is the term for the amount of matter in an object?", ['Weight', 'Density', 'Mass', 'Volume'], 'Mass'),
+    new Question("Which element has the highest melting point?", ['Iron', 'Carbon', 'Tungsten', 'Uranium'], 'Tungsten'),
+    new Question("What is the name of the galaxy that contains our solar system?", ['Andromeda', 'Milky Way', 'Whirlpool', 'Triangulum'], 'Milky Way'),
+    new Question("What is the term for a reaction in which an atom loses an electron?", ['Reduction', 'Oxidation', 'Hydrolysis', 'Neutralization'], 'Oxidation'),
+    new Question("Which layer of the Earth is made up of tectonic plates?", ['Crust', 'Mantle', 'Outer core', 'Inner core'], 'Crust'),
+    new Question("What is the basic unit of life?", ['Organ', 'Cell', 'Tissue', 'Molecule'], 'Cell'),
+    new Question("What is the name of the force that keeps objects in orbit around each other?", ['Centrifugal force', 'Gravitational force', 'Electromagnetic force', 'Nuclear force'], 'Gravitational force')
+];
 
 // Function for randomly shuffle questions and answers
 function shuffleArray(array) {
@@ -49,13 +48,16 @@ function shuffleArray(array) {
 }
 
 // Function for handle question's functionality
-function showQuestion(question) {
+function showQuestion(currentQuestionIndex) {
+    const question = questions[currentQuestionIndex];
     const questionElement = document.getElementById('question');
-    questionElement.innerText = question.text;
+    const questionNumber = currentQuestionIndex +1;
+    questionElement.innerText = `Question ${questionNumber}: ${question.text}`;
 
+    const answerLetters = ['a', 'b', 'c', 'd'];
     const buttons = document.querySelectorAll("#answer-buttons .btn");
     buttons.forEach((button, index) => {
-        button.innerText = question.choices[index];
+        button.innerText = `${answerLetters[index]}) ${question.choices[index]}`;
         button.className = 'btn';
         button.disabled = false;
     });
@@ -67,7 +69,8 @@ function showQuestion(question) {
 }
 
 // Function for evaluate if the selected answer is correct or not.
-function selectAnswer(question, choice, button) {
+function selectAnswer(question, choiceText, button) {
+    const choice = choiceText.substring(3);
     const feedbackElement = document.getElementById('feedback');
     const isCorrect = question.isCorrectAnswer(choice);
 
@@ -86,11 +89,11 @@ function selectAnswer(question, choice, button) {
     setTimeout(() => {
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
-            showQuestion(questions[currentQuestionIndex]);
+            showQuestion(currentQuestionIndex);
         } else {
             showFinalScore();
         }
-    }, 1000);
+    }, 700);
 }
 
 function setupEventListeners() {
@@ -110,11 +113,11 @@ function setupGame() {
     questions.forEach(question => question.shuffleChoices());
     currentQuestionIndex = 0;
     score = 0;
-    showQuestion(questions[currentQuestionIndex]);
+    showQuestion(currentQuestionIndex);
 
 }
 function restartQuiz() {
-    setupGame(questions);
+    setupGame();
 
     // Hide the quiz end container
     const quizEndContainer = document.getElementById('quiz-end-container');
@@ -142,7 +145,7 @@ function showFinalScore() {
 }
 
 function initializeQuiz() {
-    setupGame(questions);
+    setupGame();
     setupEventListeners();
 }
 
