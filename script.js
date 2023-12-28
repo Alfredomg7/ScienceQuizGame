@@ -1,4 +1,7 @@
-// Define class for create questions
+// Leading letters constant for answer labeling
+const ANSWER_LETTERS = ['a', 'b', 'c', 'd'];
+
+// Question class to create question objects with text, choices, and the correct answer
 class Question {
     constructor(text, choices, answer) {
         this.text = text;
@@ -39,7 +42,7 @@ const questions = [
     new Question("What is the name of the force that keeps objects in orbit around each other?", ['Centrifugal force', 'Gravitational force', 'Electromagnetic force', 'Nuclear force'], 'Gravitational force')
 ];
 
-// Function for randomly shuffle questions and answers
+// Utility function to shuffle an array (used for randomizing questions and choices)
 function shuffleArray(array) {
     for (let i = array.length -1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i+1));
@@ -47,28 +50,39 @@ function shuffleArray(array) {
     }
 }
 
-// Function for handle question's functionality
-function showQuestion(currentQuestionIndex) {
+// Displays the current question on the quiz interface
+function displayQuestion(currentQuestionIndex) {
     const question = questions[currentQuestionIndex];
     const questionElement = document.getElementById('question');
     const questionNumber = currentQuestionIndex +1;
     questionElement.innerText = `Question ${questionNumber}: ${question.text}`;
+}
 
-    const answerLetters = ['a', 'b', 'c', 'd'];
+// Update answer buttons based on current question
+function initializeAnswerButtons(question) {
     const buttons = document.querySelectorAll("#answer-buttons .btn");
     buttons.forEach((button, index) => {
         button.innerText = `${answerLetters[index]}) ${question.choices[index]}`;
         button.className = 'btn';
         button.disabled = false;
     });
+}
 
-    // Clear feedback
+// Clear the feedback message from the previous question
+function clearFeedback() {
     const feedbackElement = document.getElementById('feedback');
     feedbackElement.textContent = '';
     feedbackElement.className = 'feedback';
 }
 
-// Function for evaluate if the selected answer is correct or not.
+// Display the current question and its choices
+function showQuestion(currentQuestionIndex) {
+    displayQuestion(currentQuestionIndex);
+    initializeAnswerButtons(questions[currentQuestionIndex]);
+    clearFeedback();
+}
+
+// Evaluate the selected answer and update the UI accordingly
 function selectAnswer(question, choiceText, button) {
     const choice = choiceText.substring(3);
     const feedbackElement = document.getElementById('feedback');
@@ -95,11 +109,9 @@ function selectAnswer(question, choiceText, button) {
             showFinalScore();
         }
     }, 700);
-
-    
 }
 
-// Function for increase progress bar each time a question is answered
+// Update the progress bar based on the current question index
 function updateProgressBar(currentQuestionIndex) {
     const totalQuestions = questions.length;
     const progressBar = document.getElementById('progress-bar');
@@ -107,6 +119,7 @@ function updateProgressBar(currentQuestionIndex) {
     progressBar.style.width = progressPercentage + '%';
 }
 
+// Setup event listeners for answer buttons and the restart button
 function setupEventListeners() {
     const answerButtonsElement = document.getElementById('answer-buttons');
     answerButtonsElement.addEventListener('click', function(e) {
@@ -119,15 +132,16 @@ function setupEventListeners() {
     document.getElementById('restart-button').addEventListener('click', restartQuiz);
 }
 
+// Initialize the game by shuffling questions and resetting the state
 function setupGame() {
     shuffleArray(questions);
     questions.forEach(question => question.shuffleChoices());
     currentQuestionIndex = 0;
     score = 0;
     showQuestion(currentQuestionIndex);
-
 }
 
+// Reset the progress bar to its initial state
 function resetProgressBar() {
     const progressBar = document.getElementById('progress-bar');
     progressBar.style.transition = 'none';
@@ -139,17 +153,20 @@ function resetProgressBar() {
     }, 10); 
 }
 
+// Hide the final-score section and reset button
 function hideQuizEndContainer() {
     const quizEndContainer = document.getElementById('quiz-end-container');
     quizEndContainer.style.display = 'none';
 }
 
+// Handle the quiz restart logic
 function restartQuiz() {
     setupGame();
     resetProgressBar();
     hideQuizEndContainer();
 }
 
+// Display the final score at the end of the quiz
 function showFinalScore() {
     const finalScoreElement = document.getElementById('final-score');
     const quizEndContainer = document.getElementById('quiz-end-container');
@@ -170,6 +187,7 @@ function showFinalScore() {
     quizEndContainer.style.display = 'block';
 }
 
+// Initial function to start the quiz
 function initializeQuiz() {
     setupGame();
     setupEventListeners();
