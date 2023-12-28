@@ -1,6 +1,3 @@
-// Initialize score at 0 in global scope
-let score = 0
-
 // Define class for create questions
 class Question {
     constructor(text, choices, answer) {
@@ -11,6 +8,10 @@ class Question {
 
     isCorrectAnswer(choice) {
         return this.answer === choice;
+    }
+
+    shuffleChoices() {
+        shuffleArray(this.choices);
     }
 }
 
@@ -29,8 +30,13 @@ const questions = [
     new Question("What is the chemical formula for water?", ['a) H2O', 'b) CO2', 'c) CH4', 'd) O2'], 'a) H2O')
 ]
 
-// Initialize questions looping
-let currentQuestionIndex = 0;
+// Function for randomly shuffle questions and answers
+function shuffleArray(array) {
+    for (let i = array.length -1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 // Function for handle question's functionality
 function showQuestion(question) {
@@ -90,7 +96,12 @@ function showFinalScore() {
     alert(`Quiz finished! Your score: ${score}/${questions.length}`);
 
 }
+
 function initializeQuiz() {
+    shuffleArray(questions);
+    questions.forEach(question => question.shuffleChoices());
+    currentQuestionIndex = 0;
+    score = 0;
     showQuestion(questions[currentQuestionIndex]);
     setupEventListeners();
 }
