@@ -62,7 +62,7 @@ function displayQuestion(currentQuestionIndex) {
 function initializeAnswerButtons(question) {
     const buttons = document.querySelectorAll("#answer-buttons .btn");
     buttons.forEach((button, index) => {
-        button.innerText = `${answerLetters[index]}) ${question.choices[index]}`;
+        button.innerText = `${ANSWER_LETTERS[index]}) ${question.choices[index]}`;
         button.className = 'btn';
         button.disabled = false;
     });
