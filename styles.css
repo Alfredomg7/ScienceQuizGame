@@ -7,6 +7,21 @@ body {
     background-color: #f0f0f0;
 }
 
+#progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+#progress-bar {
+    height: 20px;
+    background-color: #4caf50;
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+}
+
 #quiz-container {
     width: 50%;
     background-color: #fff;

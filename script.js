@@ -89,11 +89,22 @@ function selectAnswer(question, choiceText, button) {
     setTimeout(() => {
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
+            updateProgressBar(currentQuestionIndex);
             showQuestion(currentQuestionIndex);
         } else {
             showFinalScore();
         }
     }, 700);
+
+    
+}
+
+// Function for increase progress bar each time a question is answered
+function updateProgressBar(currentQuestionIndex) {
+    const totalQuestions = questions.length;
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercentage = ((currentQuestionIndex + 1) /  totalQuestions) * 100;
+    progressBar.style.width = progressPercentage + '%';
 }
 
 function setupEventListeners() {
@@ -116,12 +127,27 @@ function setupGame() {
     showQuestion(currentQuestionIndex);
 
 }
-function restartQuiz() {
-    setupGame();
 
-    // Hide the quiz end container
+function resetProgressBar() {
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+
+    // Re-enable the smooth transition after a short delay
+    setTimeout(() => {
+        progressBar.style.transition = 'width 0.4s ease-in-out';
+    }, 10); 
+}
+
+function hideQuizEndContainer() {
     const quizEndContainer = document.getElementById('quiz-end-container');
     quizEndContainer.style.display = 'none';
+}
+
+function restartQuiz() {
+    setupGame();
+    resetProgressBar();
+    hideQuizEndContainer();
 }
 
 function showFinalScore() {
