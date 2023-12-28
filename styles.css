@@ -48,3 +48,14 @@ body {
     background-color: #ED4337;
     color: #fff;
 }
+
+.final-score {
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+}

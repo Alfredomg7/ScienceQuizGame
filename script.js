@@ -93,8 +93,18 @@ function setupEventListeners() {
 }
 
 function showFinalScore() {
-    alert(`Quiz finished! Your score: ${score}/${questions.length}`);
-
+    const finalScoreElement = document.getElementById('final-score');
+    const scorePercentage = (score / questions.length) * 100;
+    
+    finalScoreElement.textContent = `Your final score: ${score}/${questions.length} (${scorePercentage.toFixed(1)}%)`;
+    
+    if (scorePercentage >= 60) {
+        finalScoreElement.className = 'final-score correct';
+    } else {
+        finalScoreElement.className = 'final-score wrong';
+    }
+    
+    finalScoreElement.style.display = 'block';
 }
 
 function initializeQuiz() {
