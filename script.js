@@ -40,32 +40,48 @@ function showQuestion(question) {
     const buttons = document.querySelectorAll(".btn");
     buttons.forEach((button, index) => {
         button.innerText = question.choices[index];
+        button.className = 'btn';
+        button.disabled = false;
     });
+
+    // Clear feedback
+    const feedbackElement = document.getElementById('feedback');
+    feedbackElement.textContent = '';
+    feedbackElement.className = 'feedback';
 }
 
 // Function for evaluate if the selected answer is correct or not.
-function selectAnswer(question, choice) {
-    if (question.isCorrectAnswer(choice)) {
-        alert('Correct!');
+function selectAnswer(question, choice, button) {
+    const feedbackElement = document.getElementById('feedback');
+    const isCorrect = question.isCorrectAnswer(choice);
+
+    if (isCorrect) {
+        feedbackElement.textContent = 'Correct!';
+        feedbackElement.className = 'feedback correct';
+        button.className = 'btn correct';
         score++;
     } else {
-        alert('Wrong!');
+        feedbackElement.textContent = 'Wrong!';
+        feedbackElement.className = 'feedback wrong';
+        button.className = 'btn wrong';
     }
 
     // Move to the next question or finish the quiz
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion(questions[currentQuestionIndex]);
-    } else {
-        showFinalScore();
-    }
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion(questions[currentQuestionIndex]);
+        } else {
+            showFinalScore();
+        }
+    }, 1000);
 }
 
 function setupEventListeners() {
     const answerButtonsElement = document.getElementById('answer-buttons');
     answerButtonsElement.addEventListener('click', function(e) {
         if (e.target.tagName === 'BUTTON') {
-            selectAnswer(questions[currentQuestionIndex], e.target.textContent);
+            selectAnswer(questions[currentQuestionIndex], e.target.textContent, e.target);
         }
     });
 }

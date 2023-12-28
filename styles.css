@@ -31,3 +31,20 @@ body {
     cursor: pointer;
     font-size: 16px;
 }
+
+.feedback {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.correct {
+    background-color: #68E8E3;
+    color: #fff;
+}
+
+.wrong {
+    background-color: #ED4337;
+    color: #fff;
+}
