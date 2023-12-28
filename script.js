@@ -37,7 +37,6 @@ function showQuestion(question) {
     const buttons = document.querySelectorAll(".btn");
     buttons.forEach((button, index) => {
         button.innerText = question.choices[index];
-        button.addEventListener('click', () => selectAnswer(question, question.choices[index]));
     });
 }
 
@@ -58,5 +57,19 @@ function selectAnswer(question, choice) {
     }
 }
 
-// Start the quiz by displaying the first question
-showQuestion(questions[currentQuestionIndex]);
+function setupEventListeners() {
+    const answerButtonsElement = document.getElementById('answer-buttons');
+    answerButtonsElement.addEventListener('click', function(e) {
+        if (e.target.tagName === 'BUTTON') {
+            selectAnswer(questions[currentQuestionIndex], e.target.textContent);
+        }
+    });
+}
+
+function initializeQuiz() {
+    showQuestion(questions[currentQuestionIndex]);
+    setupEventListeners();
+}
+
+// Start the quiz
+initializeQuiz();
