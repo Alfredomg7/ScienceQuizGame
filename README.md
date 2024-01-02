@@ -1,14 +1,15 @@
-# Science Quiz Game
+# Quiz Game
 ## Overview
-Welcome to the Science Quiz Game! This interactive web-based quiz tests your knowledge in various fields of science, ranging from physics and chemistry to biology and astronomy. With a sleek and responsive design, the game offers a fun and educational experience for science enthusiasts of all ages.
+Welcome to Quiz Game! This web-based quiz platform tests your knowledge across a variety of topics. It offers a dynamic and engaging experience, perfect for quiz enthusiasts and learners of all ages.
 
 ## Features
-1. **Dynamic Question Bank**: A diverse set of science-related questions to challenge your knowledge.
-2. **Randomized Questions and Answers**: Each game shuffles questions and answer choices for a fresh experience.
-3. **Instant Feedback**: Immediate response to your answers, letting you know if you were correct or not.
-4. **Progress Tracking**: A visual progress bar to show your advancement through the quiz.
-5. **Responsive Design**: A layout that adapts to different screen sizes, ensuring a great experience on both desktop and mobile devices.
-6. **Final Score Summary**: Detailed summary at the end of the quiz, with color-coded performance levels.
+1. **Dynamic Question Bank**: Fetch questions from the Open Trivia Database API, providing a vast and diverse range of topics.
+2. **Customizable Quiz Settings**: Choose the number of questions, category, and difficulty before starting the quiz.
+3. **Randomized Questions and Answers**: Each game session shuffles questions and answer choices for a fresh experience.
+4. **Instant Feedback**: Get immediate response to your answers, letting you know if you were correct or not.
+5. **Progress Tracking**: A visual progress bar shows your progress through the quiz.
+6. **Responsive Design**: A layout that adapts to different screen sizes, ensuring a great experience on both desktop and mobile devices.
+7. **Final Score Summary**: Detailed summary at the end of the quiz, with color-coded performance levels.
 
 ## Technologies Used
 - HTML
@@ -29,8 +30,9 @@ cd science-quiz-game
 3. Open `index.html` in your web browser to start playing the quiz.
 
 ## How to Play
-1. Select one of the four answer choices for each question.
-2. After selecting your answer, you'll receive instant feedback.
-3. The progress bar at the top will track your advancement through the quiz.
-4. At the end of the quiz, your final score will be displayed along with a percentage score.
-5. Click "Restart" to play again with a new set of randomized questions and choices.
+1. Set your quiz preferences (number of questions, category, and difficulty) and start the quiz.
+2. Select one of the four answer choices for each question.
+3. After selecting your answer, you'll receive instant feedback.
+4. The progress bar at the top will track your advancement through the quiz.
+5. At the end of the quiz, your final score will be displayed along with a percentage score.
+6. Click "Restart" to play again or "New Quiz" to fetch a new set of questions.
