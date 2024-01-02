@@ -38,10 +38,14 @@ async function fetchQuestions(amount, category, difficulty) {
             const data = await response.json();
             console.log(data.results);
             return data.results.map((question) => formatQuestion(question));
-        } 
+        } else if (response.status === 429) {
+            console.error('Rate limit exceeded. Please wait and try again.');
+            alert('Rate limit exceeded. Please wait a few moments before starting a new game.');
+        } else {
             throw new Error(`HTTP error! status: ${response.status}`);
-        } catch(error) {
-            console.error('Fetching questions failed:', error);
+        }
+    } catch(error) {
+        console.error('Fetching questions failed:', error);
         }
 
 }
@@ -151,11 +155,11 @@ async function getQuestions() {
 }
 
 // Reset state and shuffle questions and answers 
-function setupQuestions() {
+function resetGameState() {
     currentQuestionIndex = 0;
     score = 0;
-    shuffleArray(questions);
-    questions.forEach(question => question.shuffleChoices());
+    resetProgressBar();
+    hideQuizEndContainer();
 }
 // Setup event listeners for answer buttons and the restart button
 function setupEventListeners() {
@@ -166,14 +170,17 @@ function setupEventListeners() {
         }
     });
 
-    // Attach event listener to restart button
+    // Attach event listeners to 'restart' and 'new quiz' buttons
     document.getElementById('restart-button').addEventListener('click', restartQuiz);
+    document.getElementById('new-quiz-button').addEventListener('click', startNewGame);
 }
 
 // Initialize the game by shuffling questions and resetting the state
 async function setupGame() {
     if (questions && Array.isArray(questions)) {
-        setupQuestions();
+        resetGameState();
+        shuffleArray(questions);
+        questions.forEach(question => question.shuffleChoices());
         showQuestion(currentQuestionIndex);
     } else {
         console.error('No questions were returned from the API.');
@@ -204,22 +211,6 @@ function displayQuizSetup() {
     document.getElementById('quiz-setup').style.display = 'block';
     
 }
-// Hide the final-score section and reset button
-function hideQuizEndContainer() {
-    const quizEndContainer = document.getElementById('quiz-end-container');
-    quizEndContainer.style.display = 'none';
-}
-
-// Handle the quiz restart logic
-function restartQuiz() {
-    setupQuestions();
-    resetProgressBar();
-    hideQuizEndContainer();
-    displayQuizContainer();
-    showQuestion(currentQuestionIndex);
-
-
-}
 
 // Display the final score at the end of the quiz
 function showFinalScore() {
@@ -240,6 +231,28 @@ function showFinalScore() {
     }
     
     quizEndContainer.style.display = 'block';
+}
+
+// Hide the final-score section and reset button
+function hideQuizEndContainer() {
+    const quizEndContainer = document.getElementById('quiz-end-container');
+    quizEndContainer.style.display = 'none';
+}
+
+// Handle the quiz restart logic
+function restartQuiz() {
+    resetGameState();
+    shuffleArray(questions);
+    questions.forEach(question => question.shuffleChoices());
+    displayQuizContainer();
+    showQuestion(currentQuestionIndex);
+}
+
+// Handle starting a new game with new questions
+async function startNewGame(){
+    resetGameState();
+    displayQuizSetup();
+    location.reload();
 }
 
 // Initial function to start the quiz
