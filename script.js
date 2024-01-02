@@ -132,6 +132,8 @@ function updateProgressBar(currentQuestionIndex) {
 async function getQuestions() {
     const quizOptionsForm = document.getElementById('quiz-options-form');
     quizOptionsForm.addEventListener('submit', async function(e) {e.preventDefault();
+        
+        displayQuizContainer();
 
         const amount = document.getElementById('question-amount').value;
         const category = document.getElementById('category-select').value;
@@ -148,6 +150,13 @@ async function getQuestions() {
     });
 }
 
+// Reset state and shuffle questions and answers 
+function setupQuestions() {
+    currentQuestionIndex = 0;
+    score = 0;
+    shuffleArray(questions);
+    questions.forEach(question => question.shuffleChoices());
+}
 // Setup event listeners for answer buttons and the restart button
 function setupEventListeners() {
     const answerButtonsElement = document.getElementById('answer-buttons');
@@ -164,10 +173,7 @@ function setupEventListeners() {
 // Initialize the game by shuffling questions and resetting the state
 async function setupGame() {
     if (questions && Array.isArray(questions)) {
-        currentQuestionIndex = 0;
-        score = 0;
-        shuffleArray(questions);
-        questions.forEach(question => question.shuffleChoices());
+        setupQuestions();
         showQuestion(currentQuestionIndex);
     } else {
         console.error('No questions were returned from the API.');
@@ -186,6 +192,18 @@ function resetProgressBar() {
     }, 10); 
 }
 
+// Hide the quiz setup form and show quiz container
+function displayQuizContainer() {
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+}
+
+// Hide the quiz container and show quiz setup form
+function displayQuizSetup() {
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('quiz-setup').style.display = 'block';
+    
+}
 // Hide the final-score section and reset button
 function hideQuizEndContainer() {
     const quizEndContainer = document.getElementById('quiz-end-container');
@@ -194,9 +212,13 @@ function hideQuizEndContainer() {
 
 // Handle the quiz restart logic
 function restartQuiz() {
-    setupGame();
+    setupQuestions();
     resetProgressBar();
     hideQuizEndContainer();
+    displayQuizContainer();
+    showQuestion(currentQuestionIndex);
+
+
 }
 
 // Display the final score at the end of the quiz

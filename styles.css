@@ -8,13 +8,21 @@ body {
     font-size: 16px;
 }
 
-#quiz-setup {
-    text-align: center;
-    margin-bottom: 20px;
+#quiz-setup, #quiz-container {
+    width: 50%;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#quiz-setup {
+    text-align: center;
+    margin-bottom: 20px;;
+}
+
+#quiz-container {
+    display: none;
 }
 
 #question, #setup-title {
@@ -24,7 +32,7 @@ body {
 
 #quiz-options-form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: 1fr;
     gap: 10px;
     align-items: center;
     justify-items: center;
@@ -38,7 +46,7 @@ body {
 
 #quiz-options-form input[type="number"],
 #quiz-options-form select {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -67,14 +75,6 @@ body {
     border-radius: 5px;
     width: 0%;
     transition: width 0.4s ease-in-out;
-}
-
-#quiz-container {
-    width: 50%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn-grid {
