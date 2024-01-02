@@ -36,17 +36,15 @@ async function fetchQuestions(amount, category, difficulty) {
         const response = await fetch(apiURL);
         if (response.ok) {
             const data = await response.json();
-            console.log(data.results);
             return data.results.map((question) => formatQuestion(question));
         } else if (response.status === 429) {
-            console.error('Rate limit exceeded. Please wait and try again.');
             alert('Rate limit exceeded. Please wait a few moments before starting a new game.');
         } else {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch(error) {
-        console.error('Fetching questions failed:', error);
-        }
+        alert('Fetching questions failed:', error);
+    }
 
 }
 
@@ -146,10 +144,9 @@ async function getQuestions() {
         questions = await fetchQuestions(amount, category, difficulty);
     
         if (questions && questions.length > 0 ) {
-            console.log(questions);
             setupGame();
         } else {
-        console.error('No questions were returned from the API.');
+            alert('No questions were returned from the API.');
         }
     });
 }
@@ -183,7 +180,7 @@ async function setupGame() {
         questions.forEach(question => question.shuffleChoices());
         showQuestion(currentQuestionIndex);
     } else {
-        console.error('No questions were returned from the API.');
+        alert('No questions were returned from the API.');
     }
 }
 
