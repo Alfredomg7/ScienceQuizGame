@@ -52,12 +52,13 @@ body {
     border: 1px solid #ddd;
 }
 
-#start-button {
+#start-button, #new-quiz-button {
     background-color: #4caf50;
     padding: 10px 20px;
+    font-weight: bold;
 }
 
-#quiz-options-form button:hover {
+#start-button:hover, #new-quiz-button:hover {
     background-color: #348037;
     transform: scale(1.05);
 }
@@ -119,10 +120,15 @@ body {
     border-radius: 5px;
 }
 
+#restart-button, #new-quiz-button {
+    width: 50%;
+    margin: 5px 0;
+}
+
 #restart-button {
-    background-color: #333;
+    padding: 10px 20px;
     font-weight: bold;
-    padding: 12px;
+    background-color: #333;
 }
 
 #restart-button:hover {
@@ -151,11 +157,20 @@ body {
 }
 
 @media (max-width: 768px) {
-    #quiz-container {
+    #quiz-container, #quiz-setup {
         width: 80%;
         padding: 10px;
     }
     
+    #quiz-options-form input[type="number"],
+    #quiz-options-form select,
+    #start-button, 
+    #new-quiz-button, 
+    #restart-button {
+        width: 100%;
+        padding: 8px;
+    }
+
     .btn-grid {
         grid-template-columns: 1fr;
         gap: 5px;
@@ -165,14 +180,27 @@ body {
         padding: 8px;
         font-size: 14px;
     }
+
+    #restart-button, #new-quiz-button {
+        width: 100%;
+        padding: 8px;
+    }
 }
 
 @media (max-width: 480px) {
-    #quiz-container {
+    #quiz-container, #quiz-setup {
         width: 95%;
     }
 
     .btn {
         font-size: 1em;
+    }
+
+    #quiz-options-form input[type="number"],
+    #quiz-options-form select,
+    #start-button, 
+    #new-quiz-button, 
+    #restart-button {
+        padding: 6px;
     }
 }
