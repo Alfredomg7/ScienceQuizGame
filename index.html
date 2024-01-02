@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science Quiz Game - Test Your Knowledge!</title>
+    <title>Quiz Game - Test Your Knowledge!</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,42 @@
 </head>
 <body>
     <main id="quiz-container" role="main">
+        <section id="quiz-setup">
+            <h2 id="setup-title">Setup Your Quiz</h2>
+            <form id="quiz-options-form">
+                <label for="question-amount">Number of Questions:</label>
+                <input type="number" id="question-amount" name="amount" min="1" max="50" value="10">
+                
+                <label for="category-select">Category:</label>
+                <select id="category-select" name="category">
+                    <option value="9">General Knowledge</option>
+                    <option value="11">Movies</option>
+                    <option value="12">Music</option>
+                    <option value="14">Television</option>
+                    <option value="15">Video Games</option>
+                    <option value="17">Science & Nature</option>
+                    <option value="19">Mathematics</option>
+                    <option value="21">Sports</option>
+                    <option value="23">History</option>
+                    <option value="27">Animals</option>
+                    <option value="29">Comics</option>
+                    <option value="31">Anime & Manga</option>
+                </select>
+
+                <label for="difficulty-select">Difficulty:</label>
+                <select id="difficulty-select" name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <button type="submit" id="start-button" class="btn" aria-label="Start the Quiz">Start</button>
+            </form>
+        </section>
         <div id="progress-bar-container" aria-live="polite">
             <div id="progress-bar"></div>
         </div>
-        <div id="question" tabindex="0">Question text goes here</div>
+        <h3 id="question" tabindex="0">Question text goes here</h3>
         <div id="answer-buttons" class="btn-grid">
             <button class="btn" aria-label="Select answer 1">Answer 1</button>
             <button class="btn" aria-label="Select answer 2">Answer 2</button>

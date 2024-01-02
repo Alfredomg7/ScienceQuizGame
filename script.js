@@ -1,5 +1,8 @@
-// Leading letters constant for answer labeling
+// Initialize global variables
 const ANSWER_LETTERS = ['a', 'b', 'c', 'd'];
+let questions = [];
+let currentQuestionIndex = 0;
+let score = 0;
 
 // Question class to create question objects with text, choices, and the correct answer
 class Question {
@@ -18,36 +21,42 @@ class Question {
     }
 }
 
-// Create questions, options and correct answer in an array
-const questions = [
-    new Question("What is the rate of acceleration of gravity at the Earth's surface?",['11.2 m/s2', '9.8 m/s2', '7.8 m/s2', '6.7 m/s2'], '9.8 m/s2'),
-    new Question("What is the smallest particle of an element that retains the properties of that element?", ['Molecule', 'Atom', 'Proton', 'Electron'], 'Atom'),
-    new Question("What is the process by which plants convert sunlight into chemical energy?", ['Respiration', 'Photosynthesis', 'Fermentation', 'Combustion'], 'Photosynthesis'),
-    new Question("What is the chemical symbol for gold?", ['Go', 'Ag', 'Au', 'Hg'], 'Au'),
-    new Question("Which gas makes up the majority of Earth's atmosphere?", ['Oxygen', 'Carbon dioxide', 'Nitrogen', 'Hydrogen'], 'Nitrogen'),
-    new Question("What is the study of earthquakes and the movement of the Earth's crust called?", ['Seismology', 'Geology', 'Astronomy', 'Meteorology'], 'Seismology'),
-    new Question("What is the process by which plants lose water vapor through small openings in their leaves?", ['Transpiration', 'Condensation', 'Precipitation', 'Evaporation'], 'Transpiration'),
-    new Question("What is the SI unit of electric current?", ['Volt', 'Ampere', 'Ohm', 'Watt'], 'Ampere'),
-    new Question("Which of the following is the largest mammal on Earth?", ['African elephant', 'Blue whale', 'Giraffe', 'Polar bear'], 'Blue whale'),
-    new Question("What is the chemical formula for water?", ['H2O', 'CO2', 'CH4', 'O2'], 'H2O'),
-    new Question("What is the main constituent of the sun?", ['Hydrogen', 'Helium', 'Oxygen', 'Carbon'], 'Hydrogen'),
-    new Question("Which vitamin is produced by the human skin in response to sunlight?", ['Vitamin A', 'Vitamin B', 'Vitamin C', 'Vitamin D'], 'Vitamin D'),
-    new Question("What phenomenon causes the tail of a comet to always point away from the sun?", ['Gravity', 'Solar wind', 'Magnetic field', 'Radiation pressure'], 'Solar wind'),
-    new Question("What is the term for the amount of matter in an object?", ['Weight', 'Density', 'Mass', 'Volume'], 'Mass'),
-    new Question("Which element has the highest melting point?", ['Iron', 'Carbon', 'Tungsten', 'Uranium'], 'Tungsten'),
-    new Question("What is the name of the galaxy that contains our solar system?", ['Andromeda', 'Milky Way', 'Whirlpool', 'Triangulum'], 'Milky Way'),
-    new Question("What is the term for a reaction in which an atom loses an electron?", ['Reduction', 'Oxidation', 'Hydrolysis', 'Neutralization'], 'Oxidation'),
-    new Question("Which layer of the Earth is made up of tectonic plates?", ['Crust', 'Mantle', 'Outer core', 'Inner core'], 'Crust'),
-    new Question("What is the basic unit of life?", ['Organ', 'Cell', 'Tissue', 'Molecule'], 'Cell'),
-    new Question("What is the name of the force that keeps objects in orbit around each other?", ['Centrifugal force', 'Gravitational force', 'Electromagnetic force', 'Nuclear force'], 'Gravitational force')
-];
-
 // Utility function to shuffle an array (used for randomizing questions and choices)
 function shuffleArray(array) {
     for (let i = array.length -1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i+1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+// Fetch questions from Open Trivia Database API
+async function fetchQuestions(amount, category, difficulty) {
+    const apiURL = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple&encode=url3986`;
+    try {
+        const response = await fetch(apiURL);
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.results);
+            return data.results.map((question) => formatQuestion(question));
+        } 
+            throw new Error(`HTTP error! status: ${response.status}`);
+        } catch(error) {
+            console.error('Fetching questions failed:', error);
+        }
+
+}
+
+// Format question from API to match the Question class
+function formatQuestion(questionItem) {
+    const decodedQuestion = decodeURIComponent(questionItem.question);
+    const decodedChoices = questionItem.incorrect_answers.map(answer => decodeURIComponent(answer));
+    const decodedCorrectAnswer = decodeURIComponent(questionItem.correct_answer);
+
+    return new Question(
+        decodedQuestion,
+        [...decodedChoices, decodedCorrectAnswer],
+        decodedCorrectAnswer
+    );
 }
 
 // Displays the current question on the quiz interface
@@ -119,6 +128,26 @@ function updateProgressBar(currentQuestionIndex) {
     progressBar.style.width = progressPercentage + '%';
 }
 
+// Handle quiz form submission
+async function getQuestions() {
+    const quizOptionsForm = document.getElementById('quiz-options-form');
+    quizOptionsForm.addEventListener('submit', async function(e) {e.preventDefault();
+
+        const amount = document.getElementById('question-amount').value;
+        const category = document.getElementById('category-select').value;
+        const difficulty = document.getElementById('difficulty-select').value;
+    
+        questions = await fetchQuestions(amount, category, difficulty);
+    
+        if (questions && questions.length > 0 ) {
+            console.log(questions);
+            setupGame();
+        } else {
+        console.error('No questions were returned from the API.');
+        }
+    });
+}
+
 // Setup event listeners for answer buttons and the restart button
 function setupEventListeners() {
     const answerButtonsElement = document.getElementById('answer-buttons');
@@ -133,12 +162,16 @@ function setupEventListeners() {
 }
 
 // Initialize the game by shuffling questions and resetting the state
-function setupGame() {
-    shuffleArray(questions);
-    questions.forEach(question => question.shuffleChoices());
-    currentQuestionIndex = 0;
-    score = 0;
-    showQuestion(currentQuestionIndex);
+async function setupGame() {
+    if (questions && Array.isArray(questions)) {
+        currentQuestionIndex = 0;
+        score = 0;
+        shuffleArray(questions);
+        questions.forEach(question => question.shuffleChoices());
+        showQuestion(currentQuestionIndex);
+    } else {
+        console.error('No questions were returned from the API.');
+    }
 }
 
 // Reset the progress bar to its initial state
@@ -189,7 +222,7 @@ function showFinalScore() {
 
 // Initial function to start the quiz
 function initializeQuiz() {
-    setupGame();
+    getQuestions();
     setupEventListeners();
 }
 
