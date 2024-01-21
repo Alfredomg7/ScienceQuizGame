@@ -112,11 +112,12 @@ function selectAnswer(question, choiceText, button) {
 
     // Move to the next question or finish the quiz
     setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            updateProgressBar(currentQuestionIndex);
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
             showQuestion(currentQuestionIndex);
+            updateProgressBar(currentQuestionIndex);
         } else {
+            updateProgressBar(questions.length);
             showFinalScore();
         }
     }, 700);
@@ -126,7 +127,7 @@ function selectAnswer(question, choiceText, button) {
 function updateProgressBar(currentQuestionIndex) {
     const totalQuestions = questions.length;
     const progressBar = document.getElementById('progress-bar');
-    const progressPercentage = ((currentQuestionIndex + 1) /  totalQuestions) * 100;
+    const progressPercentage = ((currentQuestionIndex) /  totalQuestions) * 100;
     progressBar.style.width = progressPercentage + '%';
 }
 
