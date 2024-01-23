@@ -1,8 +1,11 @@
 # Quiz Game
+
 ## Overview
+
 Welcome to Quiz Game! This web-based quiz platform tests your knowledge across a variety of topics. It offers a dynamic and engaging experience, perfect for quiz enthusiasts and learners of all ages.
 
 ## Features
+
 1. **Dynamic Question Bank**: Fetch questions from the Open Trivia Database API, providing a vast and diverse range of topics.
 2. **Customizable Quiz Settings**: Choose the number of questions, category, and difficulty before starting the quiz.
 3. **Randomized Questions and Answers**: Each game session shuffles questions and answer choices for a fresh experience.

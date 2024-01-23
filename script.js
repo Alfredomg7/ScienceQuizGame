@@ -31,6 +31,9 @@ function shuffleArray(array) {
 
 // Fetch questions from Open Trivia Database API
 async function fetchQuestions(amount, category, difficulty) {
+    hideQuizSetup();
+    displayLoadingIndicator();
+
     const apiURL = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple&encode=url3986`;
     try {
         const response = await fetch(apiURL);
@@ -44,8 +47,10 @@ async function fetchQuestions(amount, category, difficulty) {
         }
     } catch(error) {
         alert('Fetching questions failed:', error);
+    } finally {
+        hideLoadingIndicator();
+        displayQuizContainer();
     }
-
 }
 
 // Format question from API to match the Question class
@@ -118,6 +123,7 @@ function selectAnswer(question, choiceText, button) {
             updateProgressBar(currentQuestionIndex);
         } else {
             updateProgressBar(questions.length);
+            hideQuizContainer();
             showFinalScore();
         }
     }, 700);
@@ -136,8 +142,6 @@ async function getQuestions() {
     const quizOptionsForm = document.getElementById('quiz-options-form');
     quizOptionsForm.addEventListener('submit', async function(e) {e.preventDefault();
         
-        displayQuizContainer();
-
         const amount = document.getElementById('question-amount').value;
         const category = document.getElementById('category-select').value;
         const difficulty = document.getElementById('difficulty-select').value;
@@ -197,23 +201,48 @@ function resetProgressBar() {
     }, 10); 
 }
 
-// Hide the quiz setup form and show quiz container
-function displayQuizContainer() {
-    document.getElementById('quiz-setup').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
+function displayQuizSetup() {
+    const quizSetupDiv =  document.getElementById('quiz-setup')
+    quizSetupDiv.style.display = 'block';
 }
 
-// Hide the quiz container and show quiz setup form
-function displayQuizSetup() {
-    document.getElementById('quiz-container').style.display = 'none';
-    document.getElementById('quiz-setup').style.display = 'block';
-    
+function hideQuizSetup() {
+    const quizSetupDiv = document.getElementById('quiz-setup');
+    quizSetupDiv.style.display = 'none';
+}
+function displayLoadingIndicator() {
+    const loadingDiv = document.getElementById('loading');
+    loadingDiv.style.display = 'block';
+}
+
+function hideLoadingIndicator() {
+    const loadingDiv = document.getElementById('loading');
+    loadingDiv.style.display = 'none';
+}
+
+function displayQuizContainer() {
+    const quizContainerDiv = document.getElementById('quiz-container')
+    quizContainerDiv.style.display = 'block';
+}
+
+function hideQuizContainer() {
+    const quizContainerDiv = document.getElementById('quiz-container')
+    quizContainerDiv.style.display = 'none';
+}
+
+function displayQuizEndContainer() {
+    const quizEndContainer = document.getElementById('quiz-end-container');
+    quizEndContainer.style.display = 'block';
+}
+
+function hideQuizEndContainer() {
+    const quizEndContainer = document.getElementById('quiz-end-container');
+    quizEndContainer.style.display = 'none';
 }
 
 // Display the final score at the end of the quiz
 function showFinalScore() {
     const finalScoreElement = document.getElementById('final-score');
-    const quizEndContainer = document.getElementById('quiz-end-container');
     const scorePercentage = (score / questions.length) * 100;
     
     finalScoreElement.textContent = `Your final score: ${score}/${questions.length} (${scorePercentage.toFixed(1)}%)`;
@@ -228,13 +257,7 @@ function showFinalScore() {
         finalScoreElement.className = 'final-score wrong';
     }
     
-    quizEndContainer.style.display = 'block';
-}
-
-// Hide the final-score section and reset button
-function hideQuizEndContainer() {
-    const quizEndContainer = document.getElementById('quiz-end-container');
-    quizEndContainer.style.display = 'none';
+    displayQuizEndContainer();
 }
 
 // Handle the quiz restart logic
@@ -242,6 +265,7 @@ function restartQuiz() {
     resetGameState();
     shuffleArray(questions);
     questions.forEach(question => question.shuffleChoices());
+    hideQuizSetup();
     displayQuizContainer();
     showQuestion(currentQuestionIndex);
 }
@@ -249,6 +273,7 @@ function restartQuiz() {
 // Handle starting a new game with new questions
 async function startNewGame(){
     resetGameState();
+    hideQuizEndContainer();
     displayQuizSetup();
     location.reload();
 }

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section id="quiz-setup">
+    <section class="container" id="quiz-setup">
         <h2 id="setup-title">Setup Your Quiz</h2>
         <form id="quiz-options-form">
             <label for="question-amount">Number of Questions:</label>
@@ -39,10 +39,13 @@
                 <option value="hard">Hard</option>
             </select>
 
-            <button type="submit" id="start-button" class="btn" aria-label="Start the Quiz">Start</button>
+            <button type="submit" id="start-button" class="btn green-button" aria-label="Start the Quiz">Start</button>
         </form>
     </section>
-    <main id="quiz-container" role="main">
+    <section class="container" id="loading">
+        <div class="spinner"></div>
+    </section>
+    <main class="container" id="quiz-container" role="main">
         <div id="progress-bar-container" aria-live="polite">
             <div id="progress-bar"></div>
         </div>
@@ -55,10 +58,10 @@
         </div>
         <div id="feedback" class="feedback" role="status"></div>
     </main>
-    <footer id="quiz-end-container" class="quiz-end-container" role="contentinfo">
+    <footer  class="container" id="quiz-end-container" role="contentinfo">
         <div id="final-score" class="final-score"></div>
-        <button id="restart-button" class="btn" aria-label="Restart the quiz">Restart Quiz</button>
-        <button id="new-quiz-button" class="btn" aria-label="Start new quiz">New Quiz</button>
+        <button id="restart-button" class="btn half-width-button" aria-label="Restart the quiz">Restart Quiz</button>
+        <button id="new-quiz-button" class="btn green-button half-width-button" aria-label="Start new quiz">New Quiz</button>
     </footer>
     <script src="script.js"></script>
 </body>
