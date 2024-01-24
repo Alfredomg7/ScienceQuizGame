@@ -5,14 +5,21 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
-    font-size: 16px;
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 2rem;
+    padding-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
 }
 
 .container {
     width: 50%;
-    min-height: 60vh;
-    max-height: 80vh;
-    padding: 20px 10px;
+    padding: 10px 10px;
     margin: auto;
     overflow-y: auto;
     background-color: #fff;
@@ -52,13 +59,18 @@ body {
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.2rem;
     transition: background-color 0.1s ease;
 
     &:hover:not(.correct):not(.wrong) {
         background-color: #0056b3;
     }
 }
+
+#answer-buttons .btn {
+    font-size: 1.3rem;
+}
+
 
 .feedback {
     margin-top: 10px;
@@ -153,6 +165,10 @@ body {
     border: 1px solid #ddd;
 }
 
+#difficulty-select {
+    margin-bottom: 20px;
+}
+
 #start-button, #new-quiz-button{
     background-color: #4caf50;
     font-weight: bold;
@@ -186,11 +202,33 @@ body {
     transition: width 0.4s ease-in-out;
 }
 
+@media screen and (min-width: 1024px) {
+    body {
+        font-size: 22px;
+    }
+
+    .container {
+        min-height: 40vh;
+        max-height: 50vh;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 20px;
+    }
+
+    .container {
+        min-height: 50vh;
+        max-height: 60vh;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         width: 80%;
         min-height: 70vh;
-        max-height: 90vh;
+        max-height: 80vh;
         padding: 5px 10px;
     }
     
@@ -224,10 +262,6 @@ body {
         width: 95%;
         min-height: 75vh;
         max-height: 75vh;
-    }
-
-    .btn {
-        font-size: 1em;
     }
 
     #quiz-options-form input[type="number"],
